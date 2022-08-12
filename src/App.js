@@ -1,37 +1,49 @@
 import './App.css';
-import UserComponent from "./User";
-import {PlanetComponent} from "./PanetComponent";
+import {useState} from "react";
+import {TaskComponent} from "./TaskConponent";
 
 function App() {
-    let isGreen = true;
-    let users = [
-        {name: 'John', age: 30},
-        {name: 'Pete', age: 45},
-        {name: 'Mary', age: 28}
-    ];
+    const [todoList, setTodoList] = useState([]);
+    const [newTask, setNewTask] = useState('');
 
-    let planets= [
-        {name: 'Mercury', isGasPlanet: false},
-        {name: 'Venus', isGasPlanet: false},
-        {name: 'Earth', isGasPlanet: true},
-        {name: 'Mars', isGasPlanet: false},
-        {name: 'Jupiter', isGasPlanet: true},
-        {name: 'Saturn', isGasPlanet: true},
-        {name: 'Uranus', isGasPlanet: false},
-        {name: 'Neptune', isGasPlanet: false}
-    ];
+    const handleChange = (event) => {
+        setNewTask(event.target.value);
+    }
+
+    const addTodo = () => {
+        setTodoList([...todoList, newTask]);
+    }
+
+    const deleteTodo = (index) => {
+        const newTodoList = [...todoList];
+        newTodoList.splice(index, 1);
+        setTodoList(newTodoList);
+    }
+
+    const deleteTask = (TaskName) => {
+        const newTodoList = [...todoList];
+        newTodoList.splice(newTodoList.indexOf(TaskName), 1);
+        setTodoList(newTodoList);
+    }
+
     return (
         <div className="App">
+            <div className={"addTask"}>
+                <input type="text" placeholder="Add Task" onChange={handleChange}/>
+                <br/>
+                <button onClick={addTodo}>AddTask</button>
+            </div>
+            <br/>
+            <div className="list" >
+                {todoList.map((todo, index) => {
+                        return <TaskComponent todo={todo} index={index} deleteTodo={deleteTodo} deleteTask={deleteTask}/>
+                    }
+                )}
 
-            {
-                planets.map(planet => <PlanetComponent name={planet.name} isGasPlanet={planet.isGasPlanet}/>)
-
-            }
-
+            </div>
         </div>
     );
 }
-
 
 
 export default App;
