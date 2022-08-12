@@ -1,40 +1,32 @@
 import './App.css';
-import {render} from "react-dom";
 
 function App() {
-
+    let isGreen = true;
+    let users = [
+        {name: 'John', age: 30},
+        {name: 'Pete', age: 45},
+        {name: 'Mary', age: 28}
+    ];
     return (
         <div className="App">
-            <User name={"haithem"} age={22} email={"haithem@gmail.com"} />
-            <Job title={"Web Developer"} company={"Google"} location={"Paris"} description={"Web Developer"} />
-            <Job title={"Web Designer"} company={"Facebook"} location={"New York"}  />
+            {
+                users.map(user => <UserComponent name={user.name} age={user.age}/>)
+
+            }
+
         </div>
     );
 }
 
-// eslint-disable-next-line no-unused-vars
-const User = (props) => {
+const UserComponent = (props) => {
     return (
         <div>
-            <h2>{props.name}</h2>
-            <h2>{props.age}</h2>
-            <h2>{props.email}</h2>
-            <h2>{props.numy}</h2>
+            <h1>{props.name}</h1>
+            <p>{props.age}</p>
         </div>
+
     );
 }
-
-const Job = (props) => {
-  return (
-    <div>
-        <h2>{props.title}</h2>
-        <h2>{props.company}</h2>
-        <h2>{props.location}</h2>
-        <h2>{props.description}</h2>
-    </div>
-    );
-}
-
 
 
 export default App;
