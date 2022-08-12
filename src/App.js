@@ -1,4 +1,6 @@
 import './App.css';
+import UserComponent from "./User";
+import {PlanetComponent} from "./PanetComponent";
 
 function App() {
     let isGreen = true;
@@ -7,10 +9,22 @@ function App() {
         {name: 'Pete', age: 45},
         {name: 'Mary', age: 28}
     ];
+
+    let planets= [
+        {name: 'Mercury', isGasPlanet: false},
+        {name: 'Venus', isGasPlanet: false},
+        {name: 'Earth', isGasPlanet: true},
+        {name: 'Mars', isGasPlanet: false},
+        {name: 'Jupiter', isGasPlanet: true},
+        {name: 'Saturn', isGasPlanet: true},
+        {name: 'Uranus', isGasPlanet: false},
+        {name: 'Neptune', isGasPlanet: false}
+    ];
     return (
         <div className="App">
+
             {
-                users.map(user => <UserComponent name={user.name} age={user.age}/>)
+                planets.map(planet => <PlanetComponent name={planet.name} isGasPlanet={planet.isGasPlanet}/>)
 
             }
 
@@ -18,15 +32,6 @@ function App() {
     );
 }
 
-const UserComponent = (props) => {
-    return (
-        <div>
-            <h1>{props.name}</h1>
-            <p>{props.age}</p>
-        </div>
-
-    );
-}
 
 
 export default App;
